@@ -25,7 +25,7 @@
 # exit status *)  unknown (maybe used in future)
 
 _version=1.1
-_brandt_utils=/opt/brandt/brandt-utils.sh
+_brandt_utils=/opt/brandt/common/brandt.sh
 _bin_cma=/opt/McAfee/cma/bin/cma
 _bin_linuxshield=/opt/NAI/LinuxShield/libexec/scanner
 # _conf_cma=/etc/dhcpd.conf

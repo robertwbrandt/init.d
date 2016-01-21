@@ -16,7 +16,7 @@
 # exit status *)  unknown (maybe used in future)
 
 _version=1.1
-_brandt_utils=/opt/brandt/brandt-utils.sh
+_brandt_utils=/opt/brandt/common/brandt.sh
 _this_script=/opt/brandt/init.d/oes/nds.sh
 _this_rc=/usr/local/bin/rcbrandt-nds
 _bin_nds=/opt/novell/eDirectory/sbin/ndsd

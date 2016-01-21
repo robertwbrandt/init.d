@@ -25,7 +25,7 @@
 # exit status *)  unknown (maybe used in future)
 
 _version=1.1
-_brandt_utils=/opt/brandt/brandt-utils.sh
+_brandt_utils=/opt/brandt/common/brandt.sh
 _this_conf=/etc/brandt/samba.conf
 _this_script=/opt/brandt/init.d/oes/samba.sh
 _this_initd=/etc/init.d/brandt-samba
