@@ -26,8 +26,8 @@
 # exit status *)  unknown (maybe used in future)
 
 _version=1.1
-_brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/govnet
+_brandt_utils=/opt/brandt/common/brandt.sh
+_this_script=/opt/brandt/init.d/govnet.sh
 _this_initd=/etc/init.d/brandt-govnet
 _this_rc=/usr/local/bin/rcbrandt-govnet
 
@@ -81,8 +81,8 @@ function usage() {
 	[ "$_exitcode" == "0" ] && _output=1
 	[ "$2" == "" ] || echo -e "$2"
 	( echo -e "Usage: $0 [options] command"
-	  echo -e "Commands:  start     stop     status"
-	  echo -e "           restart   setup"
+	  echo -e "Commands:  start    stop   status"
+	  echo -e "           restart  setup"
 	  echo -e "Options:"
 	  echo -e " -q, --quiet    be quiet"
 	  echo -e " -h, --help     display this help and exit"
