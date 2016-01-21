@@ -17,7 +17,7 @@
 
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/ncp2nss
+_this_script=/opt/brandt/init.d/oes/ncp2nss.sh
 _this_rc=/usr/local/bin/rcbrandt-ncp2nss
 _bin_ncp2nss=/opt/novell/httpstkd/sbin/httpstkd
 _initd_ncp2nss=/etc/init.d/novell-httpstkd

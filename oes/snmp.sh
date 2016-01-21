@@ -28,7 +28,7 @@
 
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/snmp
+_this_script=/opt/brandt/init.d/oes/snmp.sh
 _this_initd=/etc/init.d/brandt-snmp
 _this_rc=/usr/local/bin/rcbrandt-snmp
 

@@ -18,7 +18,7 @@
 
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/ftp
+_this_script=/opt/brandt/init.d/oes/ftp.sh
 _this_rc=/usr/local/bin/rcbrandt-ftp
 _bin_ftpd=/usr/sbin/pure-ftpd
 _conf_ftpd=/etc/pure-ftpd/pure-ftpd.conf

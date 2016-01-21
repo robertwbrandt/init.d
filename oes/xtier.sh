@@ -17,7 +17,7 @@
 
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/xtier
+_this_script=/opt/brandt/init.d/oes/xtier.sh
 _this_rc=/usr/local/bin/rcbrandt-xtier
 _bin_xtier_xreg=/opt/novell/xtier/bin/novell-xregd
 _bin_xtier_xsrv=/opt/novell/xtier/bin/novell-xsrvd

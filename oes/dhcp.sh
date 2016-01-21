@@ -27,7 +27,7 @@
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
 _this_conf=/etc/brandt/dhcp.conf
-_this_script=/opt/brandt/init.d/dhcp
+_this_script=/opt/brandt/init.d/oes/dhcp.sh
 _this_rc=/usr/local/bin/rcbrandt-dhcp
 _this_cron=/etc/cron.hourly/dhcp-reload
 _bin_dhcpd=/usr/sbin/dhcpd

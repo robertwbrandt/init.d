@@ -24,7 +24,7 @@
 
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/slp
+_this_script=/opt/brandt/init.d/oes/slp.sh
 _this_rc=/usr/local/bin/rcbrandt-slp
 _this_conf=/etc/brandt/slp.conf
 _bin_slp=/usr/sbin/slpd

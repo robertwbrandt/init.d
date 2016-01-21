@@ -27,7 +27,7 @@
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
 _this_conf=/etc/brandt/samba.conf
-_this_script=/opt/brandt/init.d/samba
+_this_script=/opt/brandt/init.d/oes/samba.sh
 _this_initd=/etc/init.d/brandt-samba
 _this_rc=/usr/local/bin/rcbrandt-samba
 _this_cron1=/etc/cron.hourly/samba-reload

@@ -17,7 +17,7 @@
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
 _this_conf=/etc/brandt/radius.conf
-_this_script=/opt/brandt/init.d/radius
+_this_script=/opt/brandt/init.d/oes/radius.sh
 _this_rc=/usr/local/bin/rcbrandt-radius
 _this_cron=/etc/cron.hourly/radius-reload
 _bin_radius=/usr/sbin/radiusd

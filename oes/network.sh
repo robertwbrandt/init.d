@@ -17,7 +17,7 @@
 
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/network
+_this_script=/opt/brandt/init.d/oes/network.sh
 _this_rc=/usr/local/bin/rcbrandt-network
 _initd_network=/etc/init.d/network
 

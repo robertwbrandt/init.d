@@ -16,7 +16,7 @@
 
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/lum
+_this_script=/opt/brandt/init.d/oes/lum.sh
 _this_rc=/usr/local/bin/rcbrandt-lum
 _this_cron=/etc/cron.hourly/lum-reload
 

@@ -25,7 +25,7 @@
 
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/httpstk
+_this_script=/opt/brandt/init.d/oes/httpstk.sh
 _this_rc=/usr/local/bin/rcbrandt-httpstk
 _bin_httpstkd=/opt/novell/httpstkd/sbin/httpstkd
 _initd_httpstkd=/etc/init.d/novell-httpstkd

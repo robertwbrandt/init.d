@@ -25,7 +25,7 @@
 
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/imanager
+_this_script=/opt/brandt/init.d/oes/imanager.sh
 _this_initd=/etc/init.d/brandt-imanager
 _this_rc=/usr/local/bin/rcbrandt-imanager
 _this_conf=/etc/brandt/imanager.conf

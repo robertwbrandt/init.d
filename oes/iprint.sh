@@ -26,7 +26,7 @@
 
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/iprint
+_this_script=/opt/brandt/init.d/oes/iprint.sh
 _this_initd=/etc/init.d/brandt-iprint
 _this_rc=/usr/local/bin/rcbrandt-iprint
 _this_conf=/etc/brandt/iprint.conf

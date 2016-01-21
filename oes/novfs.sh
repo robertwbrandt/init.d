@@ -17,7 +17,7 @@
 
 _version=1.1
 _brandt_utils=/opt/brandt/brandt-utils.sh
-_this_script=/opt/brandt/init.d/novfs
+_this_script=/opt/brandt/init.d/oes/novfs.sh
 _this_rc=/usr/local/bin/rcbrandt-novfs
 _bin_novfs=/opt/novell/ncl/bin/novfsd
 _initd_novfs=/etc/init.d/novfsd
