@@ -15,7 +15,6 @@
 # exit status 7)  program is not running
 # exit status *)  unknown (maybe used in future)
 
-
 _version=1.1
 _brandt_utils=/opt/brandt/common/brandt.sh
 _this_conf=/etc/brandt/zarafa.conf

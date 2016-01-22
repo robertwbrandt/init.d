@@ -27,7 +27,7 @@ _version=1.1
 _brandt_utils=/opt/brandt/common/brandt.sh
 _this_script=/opt/brandt/init.d/syslog.sh
 _this_rc=/usr/local/bin/rcbrandt-syslog
-_this_initd=/etc/init.d/syslog
+_this_initd=/etc/init.d/brandt-syslog
 _this_cron=/etc/cron.weekly/syslog-cleanup
 
 _bin_syslog=/sbin/syslog-ng

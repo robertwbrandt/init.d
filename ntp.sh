@@ -29,7 +29,8 @@ _brandt_utils=/opt/brandt/common/brandt.sh
 _this_conf=/etc/brandt/ntp.conf
 _this_script=/opt/brandt/init.d/ntp.sh
 _this_rc=/usr/local/bin/rcbrandt-ntp
-_this_initd=/etc/init.d/ntp
+_this_initd=/etc/init.d/brandt-ntp
+_initd_ntp=/etc/init.d/ntp
 _this_cron=/etc/cron.hourly/ntprestart
 
 [ ! -r "$_brandt_utils" ] && echo "Unable to find required file: $_brandt_utils" 1>&2 && exit 6

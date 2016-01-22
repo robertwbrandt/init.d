@@ -26,6 +26,7 @@ _version=1.1
 _brandt_utils=/opt/brandt/common/brandt.sh
 _this_script=/opt/brandt/init.d/oes/slp.sh
 _this_rc=/usr/local/bin/rcbrandt-slp
+_this_initd=/etc/init.d/brandt-slp
 _this_conf=/etc/brandt/slp.conf
 _bin_slp=/usr/sbin/slpd
 _conf_slp=/etc/slp.conf 
@@ -76,6 +77,7 @@ function setup_config() {
 function setup() {
 	local _status=0
 	ln -sf "$_this_script" "$_this_rc" > /dev/null 2>&1
+	ln -sf "$_this_script" "$_this_initd" > /dev/null 2>&1
 	_status=$(( $_status | $? ))	
 
 	setup_config

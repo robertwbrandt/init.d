@@ -19,6 +19,7 @@ _brandt_utils=/opt/brandt/common/brandt.sh
 _this_conf=/etc/brandt/radius.conf
 _this_script=/opt/brandt/init.d/oes/radius.sh
 _this_rc=/usr/local/bin/rcbrandt-radius
+_this_initd=/etc/init.d/brandt-radius
 _this_cron=/etc/cron.hourly/radius-reload
 _bin_radius=/usr/sbin/radiusd
 _conf_radius=/etc/raddb/radiusd.conf
@@ -172,10 +173,11 @@ function setup_cron_job() {
 function setup() {
     local _status=0 
     ln -sf "$_this_script" "$_this_rc" > /dev/null 2>&1
+    ln -sf "$_this_script" "$_this_initd" > /dev/null 2>&1
     _status=$?
 
-    chkconfig freeradius on && chkconfig freeradius 35
-    _status=$(( $_status | $? ))
+    # chkconfig freeradius on && chkconfig freeradius 35
+    # _status=$(( $_status | $? ))
 	setup_cron_job
     _status=$(( $_status | $? ))
 	test_deamon

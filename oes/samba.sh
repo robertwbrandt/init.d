@@ -37,7 +37,7 @@ _bin_nmbd=/usr/sbin/nmbd
 _conf_samba=/etc/samba/smb.conf
 _initd_smbd=/etc/init.d/smb
 _initd_nmbd=/etc/init.d/nmb
-_initd_lum=/opt/brandt/init.d/lum
+_initd_lum=/opt/brandt/init.d/oes/lum.sh
 
 _setup_samba_sysconfig=/etc/sysconfig/novell/nvlsamba2_sp2
 test -f "$_setup_samba_sysconfig" || _setup_samba_sysconfig=/etc/sysconfig/novell/nvlsamba2_sp3

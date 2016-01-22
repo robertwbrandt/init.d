@@ -27,6 +27,7 @@ _version=1.1
 _brandt_utils=/opt/brandt/common/brandt.sh
 _this_script=/opt/brandt/init.d/oes/httpstk.sh
 _this_rc=/usr/local/bin/rcbrandt-httpstk
+_this_initd=/etc/init.d/brandt-httpstk
 _bin_httpstkd=/opt/novell/httpstkd/sbin/httpstkd
 _initd_httpstkd=/etc/init.d/novell-httpstkd
 
@@ -50,6 +51,7 @@ function status() {
 
 function setup() {
 	ln -sf "$_this_script" "$_this_rc" > /dev/null 2>&1
+	ln -sf "$_this_script" "$_this_initd" > /dev/null 2>&1
 	return $?
 }
 
