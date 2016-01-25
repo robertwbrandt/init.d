@@ -151,7 +151,7 @@ function checkMySQL() {
 
 function runCommands() {
     local _status=0
-    local _delay = 15
+    local _delay=15
     cmd="$1"
 
     runCommand "$ZarafaDAgent" "$cmd" "Zarafa DAgent Deamon"
