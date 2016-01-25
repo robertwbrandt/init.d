@@ -154,6 +154,7 @@ function runCommands() {
     local _status=0
     local _delay=15
     cmd="$1"
+    echo "$1 - $cmd"
 
     runCommand "$ZarafaDAgent" "$cmd" "Zarafa DAgent Deamon"
     _status=$(( $_status | $? ))
@@ -317,6 +318,7 @@ brandt_amiroot || { echo "${BOLD_RED}This program must be run as root!${NORMAL}"
 case "$_command" in
     "status" )  status $@ ;;
     "start"|"stop"|"restart"|"reload"|"force-reload")
+                echo runCommands "$_command" $@
                 runCommands "$_command" $@ ;;
     "setup" )   setup ;; 
     * )         usage 1 ;;
