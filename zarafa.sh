@@ -174,6 +174,9 @@ function runCommands() {
     runCommand "$ZarafaPresence" "$cmd" "Zarafa Presence Deamon"
     _status=$(( $_status | $? ))
 
+    echo "$1 - $cmd"
+
+
     if [ "$cmd" == "start" ]; then
         declare -i _count=3
         while ! runCommand "$MySQL" status "MySQL Database Deamon"
@@ -193,14 +196,22 @@ function runCommands() {
         done
     fi
 
+    echo "$1 - $cmd"
+
     runCommand "$ZarafaServer" "$cmd" "Zarafa Server Deamon"
     _status=$(( $_status | $? ))
+
+    echo "$1 - $cmd"
 
     runCommand "$ZarafaICal" "$cmd" "Zarafa iCal (CalDav) Deamon"
     _status=$(( $_status | $? ))
 
+    echo "$1 - $cmd"
+
     runCommand "$ZarafaGateway" "$cmd" "Zarafa Gateway (IMAP/POP) Deamon"
     _status=$(( $_status | $? ))
+
+    echo "$1 - $cmd"
 
     return $_status
 }
