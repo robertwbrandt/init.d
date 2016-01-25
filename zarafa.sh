@@ -48,13 +48,26 @@ fi
 
 function setup() {
     local _status=0
+    echo -n "Create Symbolic Links "
     ln -sf "$_this_script" "$_this_initd" > /dev/null 2>&1
     _status=$?
-
     ln -sf "$_this_script" "$_this_rc" > /dev/null 2>&1
     _status=$(( $_status | $? ))
-
     chownmod root:root 644 "$_this_conf" > /dev/null 2>&1
+    _status=$(( $_status | $? ))
+    brandt_status status
+
+    echo "Create Symbolic Links "
+    for file in $( find /etc/init.d/ -type f -iname "zarafa-*" )
+    do
+        echo sysv-rc-conf $( basename $file ) off
+        _status=$(( $_status | $? ))
+    done
+
+    echo sysv-rc-conf zarafa on
+    _status=$(( $_status | $? ))
+    brandt_status status
+
     return $(( $_status | $? ))
 }
 
