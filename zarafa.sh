@@ -76,6 +76,7 @@ runCommand() {
     cmd="$2"
     string="$3"
     if [ -n "$initd" ]; then
+        echo "$string" "$initd" "$cmd"
         brandt_deamon_wrapper "$string" "$initd" "$cmd"
         return $?
     fi
