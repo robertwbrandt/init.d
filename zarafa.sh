@@ -57,14 +57,14 @@ function setup() {
     _status=$(( $_status | $? ))
     brandt_status status
 
-    echo "Create Symbolic Links "
+    echo -n "Modify Zarafa init.d Scripts "
     for file in $( find /etc/init.d/ -type f -iname "zarafa-*" )
     do
-        echo sysv-rc-conf $( basename $file ) off
+        sysv-rc-conf $( basename $file ) off
         _status=$(( $_status | $? ))
     done
 
-    echo sysv-rc-conf zarafa on
+    sysv-rc-conf zarafa on
     _status=$(( $_status | $? ))
     brandt_status status
 
