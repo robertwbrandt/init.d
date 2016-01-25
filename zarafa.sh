@@ -173,7 +173,7 @@ function runCommands() {
 function status() {
     local _status=0
     subcmd=$( lower ${1:-'all'} )
-    echo "status $@"
+    echo "status $subcmd"
 
     if [ "$subcmd" == "mta" ] || [ "$subcmd" == "all" ]; then
         runCommand "$Postfix" status "Postfix (MTA) Deamon"
