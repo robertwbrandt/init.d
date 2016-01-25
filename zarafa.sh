@@ -76,7 +76,6 @@ runCommand() {
     local _cmd="$2"
     local _string="$3"
     if [ -n "$_initd" ]; then
-        echo "$_string" "$_initd" "$_cmd"
         brandt_deamon_wrapper "$_string" "$_initd" "$_cmd"
         return $?
     fi
@@ -154,7 +153,6 @@ function runCommands() {
     local _status=0
     local _delay=15
     local _cmd="$1"
-    echo "$1 - $_cmd"
 
     runCommand "$ZarafaDAgent" "$_cmd" "Zarafa DAgent Deamon"
     _status=$(( $_status | $? ))
@@ -173,9 +171,6 @@ function runCommands() {
 
     runCommand "$ZarafaPresence" "$_cmd" "Zarafa Presence Deamon"
     _status=$(( $_status | $? ))
-
-    echo "$1 - $_cmd"
-
 
     if [ "$_cmd" == "start" ]; then
         declare -i _count=3
@@ -196,22 +191,14 @@ function runCommands() {
         done
     fi
 
-    echo "$1 - $_cmd"
-
     runCommand "$ZarafaServer" "$_cmd" "Zarafa Server Deamon"
     _status=$(( $_status | $? ))
-
-    echo "$1 - $_cmd"
 
     runCommand "$ZarafaICal" "$_cmd" "Zarafa iCal (CalDav) Deamon"
     _status=$(( $_status | $? ))
 
-    echo "$1 - $_cmd"
-
     runCommand "$ZarafaGateway" "$_cmd" "Zarafa Gateway (IMAP/POP) Deamon"
     _status=$(( $_status | $? ))
-
-    echo "$1 - $_cmd"
 
     return $_status
 }
@@ -329,7 +316,6 @@ brandt_amiroot || { echo "${BOLD_RED}This program must be run as root!${NORMAL}"
 case "$_command" in
     "status" )  status $@ ;;
     "start"|"stop"|"restart"|"reload"|"force-reload")
-                echo runCommands "$_command" $@
                 runCommands "$_command" $@ ;;
     "setup" )   setup ;; 
     * )         usage 1 ;;
