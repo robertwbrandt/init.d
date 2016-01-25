@@ -62,7 +62,7 @@ runCommand() {
     initd="$1"
     cmd="$2"
     string="$3"
-    if [ -z "$initd" ]; then
+    if [ -n "$initd" ]; then
         brandt_deamon_wrapper "$string" "$initd" "$cmd"
         return $?
     fi
@@ -71,7 +71,7 @@ runCommand() {
 
 function checkSMTPServer() {
     IP=${1:-'127.0.0.1'}
-    if [ -z "$IP" ] && [ -z "$Postfix" ]; then    
+    if [ -n "$IP" ] && [ -n "$Postfix" ]; then    
         echo -n "Verifying SMTP Service on $IP is responding"
         tmp=$( ( sleep 1 ; echo "helo client.test.com"; sleep 1; echo "noop" ; sleep 1 ; echo "quit" ) | telnet "$IP" 25 2> /dev/null )
         echo "$tmp" | grep -i "250.*OK" > /dev/null 2>&1
@@ -83,7 +83,7 @@ function checkSMTPServer() {
 
 function checkIMAPServer() {
     IP=${1:-'127.0.0.1'}
-    if [ -z "$IP" ] && [ -z "$ZarafaGateway" ] && [ -z "$ZarafaTestUser" ] && [ -z "$ZarafaTestPass" ]; then    
+    if [ -n "$IP" ] && [ -n "$ZarafaGateway" ] && [ -n "$ZarafaTestUser" ] && [ -n "$ZarafaTestPass" ]; then    
         echo -n "Verifying IMAP Service on $IP is responding"
         tmp=$( ( sleep 1 ; echo -e "a1 login \"$ZarafaTestUser\" \"$ZarafaTestPass\""; sleep 1; echo 'a2 list "" "*"' ; sleep 1 ; echo 'a3 logout' ) | openssl s_client -connect $IP:993 -quiet 2> /dev/null )
         ( echo "$tmp" | grep -i "a1.*OK.*LOGIN.*completed" && echo "$tmp" | grep -i "a2.*OK.*LIST.*completed" ) > /dev/null 2>&1
@@ -95,7 +95,7 @@ function checkIMAPServer() {
 
 function checkCalDavServer() {
     IP=${1:-'127.0.0.1'}
-    if [ -z "$IP" ] && [ -z "$ZarafaICal" ] && [ -z "$ZarafaTestUser" ] && [ -z "$ZarafaTestPass" ]; then    
+    if [ -n "$IP" ] && [ -n "$ZarafaICal" ] && [ -n "$ZarafaTestUser" ] && [ -n "$ZarafaTestPass" ]; then    
         echo -n "Verifying CalDav Service on $IP:8443 is responding"
         wget --no-check-certificate --user="$ZarafaTestUser" --password="$ZarafaTestPass" -O - -o /dev/null "https://$IP:8443/caldav/$ZarafaTestUser/calendar" > /dev/null 2>&1
         brandt_status status
@@ -106,7 +106,7 @@ function checkCalDavServer() {
 
 function checkZarafaWebApp() {
     IP=${1:-'127.0.0.1'}
-    if [ -z "$IP" ] && [ -z "$Apache" ]; then        
+    if [ -n "$IP" ] && [ -n "$Apache" ]; then        
         echo -n "Verifying HTTP WebApp Service on $IP is responding"
         wget --no-check-certificate -O - -o /dev/null "https://$IP/webapp" | grep '<title>Zarafa WebApp</title>' > /dev/null 2>&1
         brandt_status status
@@ -117,7 +117,7 @@ function checkZarafaWebApp() {
 
 function checkZPushActiveSync() {
     IP=${1:-'127.0.0.1'}
-    if [ -z "$IP" ] && [ -z "$Apache" ] && [ -z "$ZarafaTestUser" ] && [ -z "$ZarafaTestPass" ]; then    
+    if [ -n "$IP" ] && [ -n "$Apache" ] && [ -n "$ZarafaTestUser" ] && [ -n "$ZarafaTestPass" ]; then    
         echo -n "Verifying ActiveSync Service on $IP is responding"
         wget --no-check-certificate --user="$ZarafaTestUser" --password="$ZarafaTestPass" -O - -o /dev/null "https://$IP/Microsoft-Server-ActiveSync" | grep '<title>Z-Push ActiveSync</title>' > /dev/null 2>&1
         brandt_status status
@@ -127,7 +127,7 @@ function checkZPushActiveSync() {
 }
 
 function checkMySQL() {
-    if [ -z "$MySQL" ] && [ -z "$MySQLCredFile" ]; then
+    if [ -n "$MySQL" ] && [ -n "$MySQLCredFile" ]; then
         echo -n "Verifying MySQL Service is responding"
         mysql --defaults-extra-file=$MySQLCredFile -e "SHOW DATABASES;" > /dev/null 2>&1
         brandt_status status
