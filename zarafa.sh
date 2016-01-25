@@ -138,6 +138,7 @@ function checkMySQL() {
 
 function runCommands() {
     local _status=0
+    local _delay = 15
     cmd="$1"
 
     runCommand "$ZarafaDAgent" "$cmd" "Zarafa DAgent Deamon"
@@ -157,6 +158,25 @@ function runCommands() {
 
     runCommand "$ZarafaPresence" "$cmd" "Zarafa Presence Deamon"
     _status=$(( $_status | $? ))
+
+    if [ "$cmd" == "start" ]; then
+        declare -i _count = 3
+        while ! runCommand "$MySQL" status "MySQL Database Deamon"
+        do
+            _count=_count-1
+            [[ _count == 0 ]] && break
+            echo "Waiting for the MySQL Service to start."
+            sleep "$delay"
+        done
+        declare -i _count = 3
+        while ! checkMySQL
+        do
+            _count=_count-1
+            [[ _count == 0 ]] && break
+            echo "Waiting for the MySQL Service to become available."
+            sleep "$delay"
+        done
+    fi
 
     runCommand "$ZarafaServer" "$cmd" "Zarafa Server Deamon"
     _status=$(( $_status | $? ))
@@ -282,8 +302,8 @@ brandt_amiroot || { echo "${BOLD_RED}This program must be run as root!${NORMAL}"
 
 case "$_command" in
     "status" )  status $@ ;;
-    # "start"|"stop"|"restart"|"reload"|"force-reload")
-    #             runCommands "$_command" $@ ;;
+    "start"|"stop"|"restart"|"reload"|"force-reload")
+                runCommands "$_command" $@ ;;
     "setup" )   setup ;; 
     * )         usage 1 ;;
 esac
