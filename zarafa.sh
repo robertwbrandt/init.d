@@ -72,12 +72,12 @@ function setup() {
 }
 
 runCommand() {
-    initd="$1"
-    cmd="$2"
-    string="$3"
-    if [ -n "$initd" ]; then
-        echo "$string" "$initd" "$cmd"
-        brandt_deamon_wrapper "$string" "$initd" "$cmd"
+    local _initd="$1"
+    local _cmd="$2"
+    local _string="$3"
+    if [ -n "$_initd" ]; then
+        echo "$_string" "$_initd" "$_cmd"
+        brandt_deamon_wrapper "$_string" "$_initd" "$_cmd"
         return $?
     fi
     return 0    
@@ -153,33 +153,33 @@ function checkMySQL() {
 function runCommands() {
     local _status=0
     local _delay=15
-    cmd="$1"
-    echo "$1 - $cmd"
+    local _cmd="$1"
+    echo "$1 - $_cmd"
 
-    runCommand "$ZarafaDAgent" "$cmd" "Zarafa DAgent Deamon"
+    runCommand "$ZarafaDAgent" "$_cmd" "Zarafa DAgent Deamon"
     _status=$(( $_status | $? ))
 
-    runCommand "$ZarafaLicensed" "$cmd" "Zarafa License Deamon"
+    runCommand "$ZarafaLicensed" "$_cmd" "Zarafa License Deamon"
     _status=$(( $_status | $? ))
 
-    runCommand "$ZarafaMonitor" "$cmd" "Zarafa Monitor Deamon"
+    runCommand "$ZarafaMonitor" "$_cmd" "Zarafa Monitor Deamon"
     _status=$(( $_status | $? ))
 
-    runCommand "$ZarafaSearch" "$cmd" "Zarafa Search Deamon"
+    runCommand "$ZarafaSearch" "$_cmd" "Zarafa Search Deamon"
     _status=$(( $_status | $? ))
 
-    runCommand "$ZarafaSpooler" "$cmd" "Zarafa Spooler Deamon"
+    runCommand "$ZarafaSpooler" "$_cmd" "Zarafa Spooler Deamon"
     _status=$(( $_status | $? ))
 
-    runCommand "$ZarafaPresence" "$cmd" "Zarafa Presence Deamon"
+    runCommand "$ZarafaPresence" "$_cmd" "Zarafa Presence Deamon"
     _status=$(( $_status | $? ))
 
-    echo "$1 - $cmd"
+    echo "$1 - $_cmd"
 
 
-    if [ "$cmd" == "start" ]; then
+    if [ "$_cmd" == "start" ]; then
         declare -i _count=3
-        while ! runCommand "$MySQL" status "MySQL Database Deamon"
+        while ! runCommand "$MySQL" "$_cmd" "MySQL Database Deamon"
         do
             _count=_count-1
             [[ _count == 0 ]] && break
@@ -196,22 +196,22 @@ function runCommands() {
         done
     fi
 
-    echo "$1 - $cmd"
+    echo "$1 - $_cmd"
 
-    runCommand "$ZarafaServer" "$cmd" "Zarafa Server Deamon"
+    runCommand "$ZarafaServer" "$_cmd" "Zarafa Server Deamon"
     _status=$(( $_status | $? ))
 
-    echo "$1 - $cmd"
+    echo "$1 - $_cmd"
 
-    runCommand "$ZarafaICal" "$cmd" "Zarafa iCal (CalDav) Deamon"
+    runCommand "$ZarafaICal" "$_cmd" "Zarafa iCal (CalDav) Deamon"
     _status=$(( $_status | $? ))
 
-    echo "$1 - $cmd"
+    echo "$1 - $_cmd"
 
-    runCommand "$ZarafaGateway" "$cmd" "Zarafa Gateway (IMAP/POP) Deamon"
+    runCommand "$ZarafaGateway" "$_cmd" "Zarafa Gateway (IMAP/POP) Deamon"
     _status=$(( $_status | $? ))
 
-    echo "$1 - $cmd"
+    echo "$1 - $_cmd"
 
     return $_status
 }
