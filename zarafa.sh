@@ -95,7 +95,10 @@ function checkIMAPServer() {
 
 function checkCalDavServer() {
     IP=${1:-'127.0.0.1'}
-    if [ -n "$IP" ] && [ -n "$ZarafaICal" ] && [ -n "$ZarafaTestUser" ] && [ -n "$ZarafaTestPass" ]; then    
+    if [ -n "$IP" ] && [ -n "$ZarafaICal" ] && [ -n "$ZarafaTestUser" ] && [ -n "$ZarafaTestPass" ]; then   
+
+        echo         wget --no-check-certificate --user="$ZarafaTestUser" --password="$ZarafaTestPass" -O - -o /dev/null "https://$IP:8443/caldav/$ZarafaTestUser/calendar"
+
         echo -n "Verifying CalDav Service on $IP:8443 is responding"
         wget --no-check-certificate --user="$ZarafaTestUser" --password="$ZarafaTestPass" -O - -o /dev/null "https://$IP:8443/caldav/$ZarafaTestUser/calendar" > /dev/null 2>&1
         brandt_status status
@@ -106,7 +109,11 @@ function checkCalDavServer() {
 
 function checkZarafaWebApp() {
     IP=${1:-'127.0.0.1'}
-    if [ -n "$IP" ] && [ -n "$Apache" ]; then        
+    if [ -n "$IP" ] && [ -n "$Apache" ]; then
+
+        echo         wget --no-check-certificate -O - -o /dev/null "https://$IP/webapp"
+
+
         echo -n "Verifying HTTP WebApp Service on $IP is responding"
         wget --no-check-certificate -O - -o /dev/null "https://$IP/webapp" | grep '<title>Zarafa WebApp</title>' > /dev/null 2>&1
         brandt_status status
@@ -118,6 +125,10 @@ function checkZarafaWebApp() {
 function checkZPushActiveSync() {
     IP=${1:-'127.0.0.1'}
     if [ -n "$IP" ] && [ -n "$Apache" ] && [ -n "$ZarafaTestUser" ] && [ -n "$ZarafaTestPass" ]; then    
+
+        echo         wget --no-check-certificate --user="$ZarafaTestUser" --password="$ZarafaTestPass" -O - -o /dev/null "https://$IP/Microsoft-Server-ActiveSync"
+
+
         echo -n "Verifying ActiveSync Service on $IP is responding"
         wget --no-check-certificate --user="$ZarafaTestUser" --password="$ZarafaTestPass" -O - -o /dev/null "https://$IP/Microsoft-Server-ActiveSync" | grep '<title>Z-Push ActiveSync</title>' > /dev/null 2>&1
         brandt_status status
