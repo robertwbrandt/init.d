@@ -173,7 +173,7 @@ function runCommands() {
     _status=$(( $_status | $? ))
 
     if [ "$cmd" == "start" ]; then
-        declare -i _count = 3
+        declare -i _count=3
         while ! runCommand "$MySQL" status "MySQL Database Deamon"
         do
             _count=_count-1
@@ -181,7 +181,7 @@ function runCommands() {
             echo "Waiting for the MySQL Service to start."
             sleep "$delay"
         done
-        declare -i _count = 3
+        declare -i _count=3
         while ! checkMySQL
         do
             _count=_count-1
