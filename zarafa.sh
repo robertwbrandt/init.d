@@ -173,6 +173,7 @@ function runCommands() {
 function status() {
     local _status=0
     subcmd=$( lower ${1:-'all'} )
+    echo "status $@"
 
     if [ "$subcmd" == "mta" ] || [ "$subcmd" == "all" ]; then
         runCommand "$Postfix" status "Postfix (MTA) Deamon"
@@ -282,8 +283,8 @@ brandt_amiroot || { echo "${BOLD_RED}This program must be run as root!${NORMAL}"
 
 case "$_command" in
     "status" )  status $@ ;;
-    "start"|"stop"|"restart"|"reload"|"force-reload")
-                runCommands "$_command" $@ ;;
+    # "start"|"stop"|"restart"|"reload"|"force-reload")
+    #             runCommands "$_command" $@ ;;
     "setup" )   setup ;; 
     * )         usage 1 ;;
 esac

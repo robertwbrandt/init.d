@@ -67,10 +67,12 @@ function setup_cron_job() {
 }
 
 function setup_chroot() {
-    echo -n "Modifying $_ntp_sysconfig to chroot NTP "
-    sed -i 's|^NTPD_RUN_CHROOTED=".*|NTPD_RUN_CHROOTED="yes"|g' "$_ntp_sysconfig"
-    brandt_status setup
-    return $?
+    if [ -z "_ntp_sysconfig" ]; then
+        echo -n "Modifying $_ntp_sysconfig to chroot NTP "
+        sed -i 's|^NTPD_RUN_CHROOTED=".*|NTPD_RUN_CHROOTED="yes"|g' "$_ntp_sysconfig"
+        brandt_status setup
+        return $?
+    fi
 }
 
 function setup_servers() {
@@ -87,7 +89,7 @@ function setup_servers() {
         count=count+1
         server="$server."`dnsdomainname`
 
-        if [ $count -eq 1 ]; then
+        if [ $count -eq 1 ] && [ -z "_ntp_sysconfig" ]; then
             echo -n "Modifying $_ntp_sysconfig initial update "
             sed -i "s|^NTPD_INITIAL_NTPDATE=\".*|NTPD_INITIAL_NTPDATE=\"$server\"|" "$_ntp_sysconfig"
             brandt_status setup
@@ -115,9 +117,6 @@ function setup() {
     _status=$(( $_status | $? ))
     setup_cron_job
     _status=$(( $_status | $? ))
-
-    [ ! -r "$_ntp_sysconfig" ] && echo "Unable to find required file: $_ntp_sysconfig" 1>&2 && exit 6
-    . "$_ntp_sysconfig"
 
     setup_chroot
     _status=$(( $_status | $? ))
