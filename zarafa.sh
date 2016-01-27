@@ -174,7 +174,7 @@ function runCommands() {
 
     if [ "$_cmd" == "start" ]; then
         declare -i _count=3
-        while ! runCommand "$MySQL" "$_cmd" "MySQL Database Deamon"
+        while ! runCommand "$MySQL" "status" "MySQL Database Deamon"
         do
             _count=_count-1
             [[ _count == 0 ]] && break
