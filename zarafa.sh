@@ -151,7 +151,7 @@ function checkMySQL() {
 
 function runCommands() {
     local _status=0
-    local _delay=15
+    local _delay=10
     local _cmd="$1"
 
     runCommand "$ZarafaDAgent" "$_cmd" "Zarafa DAgent Deamon"
@@ -173,19 +173,19 @@ function runCommands() {
     _status=$(( $_status | $? ))
 
     if [ "$_cmd" == "start" ]; then
-        declare -i _count=3
+        declare -i _count=4
         while ! runCommand "$MySQL" "status" "MySQL Database Deamon"
         do
-            _count=_count-1
-            [[ _count == 0 ]] && break
+            _count=$_count-1
+            [[ $_count == 0 ]] && break
             echo "Waiting for the MySQL Service to start."
             sleep $_delay
         done
-        declare -i _count=3
+        declare -i _count=4
         while ! checkMySQL
         do
-            _count=_count-1
-            [[ _count == 0 ]] && break
+            _count=$_count-1
+            [[ $_count == 0 ]] && break
             echo "Waiting for the MySQL Service to become available."
             sleep $_delay
         done
