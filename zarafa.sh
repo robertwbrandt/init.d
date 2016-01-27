@@ -179,7 +179,7 @@ function runCommands() {
             _count=_count-1
             [[ _count == 0 ]] && break
             echo "Waiting for the MySQL Service to start."
-            sleep "$delay"
+            sleep $_delay
         done
         declare -i _count=3
         while ! checkMySQL
@@ -187,7 +187,7 @@ function runCommands() {
             _count=_count-1
             [[ _count == 0 ]] && break
             echo "Waiting for the MySQL Service to become available."
-            sleep "$delay"
+            sleep $_delay
         done
     fi
 
