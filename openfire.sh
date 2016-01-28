@@ -19,7 +19,7 @@ _version=1.2
 _brandt_utils=/opt/brandt/common/brandt.sh
 _this_script=/opt/brandt/init.d/openfire.sh
 _this_rc=/usr/local/bin/rcbrandt-openfire
-_this_initd=/etc/init.d/openfire
+_this_initd=/etc/init.d/brandt-openfire
 _initd_openfire=/etc/init.d/openfire
 _initd_apache=/etc/init.d/apache2
 
