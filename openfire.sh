@@ -45,7 +45,9 @@ function status() {
     _status=$?
 
     if [ "$_substatus" == "web" ] || [ "$_substatus" == "all" ]; then
-        brandt_deamon_wrapper "Openfire SparkWeb Service" "$_initd_apache" "status"
+        echo -n "Checking for Openfire SparkWeb Service "
+        ps -ef | grep "^openfire" | grep "java" > /dev/null 2>&1
+        brandt_status status
         _status=$(( $_status | $? ))
 
         echo -n "Verifying SparkWeb Service is responding"
@@ -105,8 +107,10 @@ brandt_amiroot || { echo "${BOLD_RED}This program must be run as root!${NORMAL}"
 case "$_command" in
     "setup" )   setup ;;
     "status" )  status "$@" ;;
-    "start" | "stop" | "restart" | "condrestart" | "reload" )
-            brandt_deamon_wrapper "Openfire IM Deamon" "$_initd_openfire" "$command" ;;         
+    "start" | "stop" | "restart" )
+                brandt_deamon_wrapper "Openfire IM Deamon" "$_initd_openfire" "$command" ;; 
+    "force-reload" | "reload" )
+                brandt_deamon_wrapper "Openfire IM Deamon" "$_initd_openfire" "force-reload" ;;
     * )         usage 1 ;;
 esac
 exit $?
