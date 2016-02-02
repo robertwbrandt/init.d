@@ -64,6 +64,12 @@ function setup() {
         _status=$(( $_status | $? ))
     done
 
+    for file in $( find /etc/ -type l | grep "/[KS][0-9]\+zarafa-" )
+    do
+        echo "$file"
+    done
+
+
     sysv-rc-conf zarafa on
     _status=$(( $_status | $? ))
     brandt_status status
