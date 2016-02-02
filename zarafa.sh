@@ -66,9 +66,9 @@ function setup() {
 
     for file in $( find /etc/ -type l | grep "/[KS][0-9]\+zarafa-" )
     do
-        echo "$file"
+        rm -f "$file" > /dev/null 2>&1
+        _status=$(( $_status | $? ))
     done
-
 
     sysv-rc-conf zarafa on
     _status=$(( $_status | $? ))
