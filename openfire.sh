@@ -41,10 +41,11 @@ function setup() {
 function status() {
     local _status=0 
     local _substatus=$( lower ${1:-all} )
+
     echo -n "Checking for Openfire IM Deamon "
     ps -ef | grep "^openfire" | grep "java" > /dev/null 2>&1
     brandt_status status
-    _status=$?
+    _status=$(( $_status | $? ))
 
     if [ "$_substatus" == "web" ] || [ "$_substatus" == "all" ]; then
         brandt_deamon_wrapper "Openfire SparkWeb Service" "$_initd_apache" "status"
