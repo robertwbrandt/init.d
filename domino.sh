@@ -26,10 +26,10 @@
 
 
 _version=1.1
-_brandt_utils=/opt/brandt/brandt-utils.sh
+_brandt_utils=/opt/brandt/common/brandt.sh
 _this_conf=/etc/brandt/domino.conf
 _this_initd=/etc/init.d/domino
-_this_script=/opt/brandt/init.d/domino
+_this_script=/opt/brandt/init.d/domino.sh
 _this_rc=/usr/local/bin/rcbrandt-domino
 _this_rc2=/usr/local/bin/rcdomino
 
@@ -49,14 +49,13 @@ if [ ! -r "$_this_conf" ]; then
    	  echo -e "       DominoMDABin=/opt/ibm/lotus/notes/latest/linux/router"
    	  echo -e "    DominoCalDavBin=/opt/ibm/lotus/notes/latest/linux/calconn"
    	  echo -e "       DominoWebBin=/opt/ibm/lotus/notes/latest/linux/http"
-	  echo -e "      DominoWebUser='Fidel Castro'"
-	  echo -e "      DominoWebPass='cuba'"
 	  echo -e "DominoWebTestString='<title>IBM Lotus iNotes Login</title>'"
    	  echo -e "      DominoIMAPBin=/opt/ibm/lotus/notes/latest/linux/imap"
-	  echo -e "     DominoIMAPUser='Fidel Castro'"
-	  echo -e "     DominoIMAPPass='cuba'" ) > "$_this_conf"
+	  echo -e "         DominoUser='Fidel Castro'"
+	  echo -e "         DominoPass='cuba'" ) > "$_this_conf"
 	echo "Unable to find required file: $_this_conf" 1>&2
 fi
+
 . "$_brandt_utils"
 . "$_this_conf"
 
@@ -188,7 +187,7 @@ function status() {
 		_status=$(( $_status | $? ))
 
 		echo -n "Verifying HTTP Service is responding"
-		wget --user="$DominoWebUser" --password="$DominoWebPass" -O - -o /dev/null http://127.0.0.1/ | grep "$DominoWebTestString" > /dev/null 2>&1
+		wget --user="$DominoUser" --password="$DominoPass" -O - -o /dev/null http://127.0.0.1/ | grep "$DominoWebTestString" > /dev/null 2>&1
 		brandt_status status
 		_status=$(( $_status | $? ))
 	fi
@@ -197,7 +196,7 @@ function status() {
 		_status=$(( $_status | $? ))
 
 		echo -n "Verifying IMAP Service is responding"
-		tmp=$( ( sleep 1 ; echo -e "a1 login \"$DominoIMAPUser\" \"$DominoIMAPPass\""; sleep 1; echo 'a2 list "" "*"' ; sleep 1 ; echo 'a3 logout' ) | telnet 127.0.0.1 143 2> /dev/null )
+		tmp=$( ( sleep 1 ; echo -e "a1 login \"$DominoUser\" \"$DominoPass\""; sleep 1; echo 'a2 list "" "*"' ; sleep 1 ; echo 'a3 logout' ) | telnet 127.0.0.1 143 2> /dev/null )
 		( echo "$tmp" | grep -i "a1 OK LOGIN completed" && echo "$tmp" | grep -i "a2 OK LIST completed" ) > /dev/null 2>&1
 		brandt_status status
 		_status=$(( $_status | $? ))
