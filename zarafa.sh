@@ -178,25 +178,6 @@ function runCommands() {
     runCommand "$ZarafaPresence" "$_cmd" "Zarafa Presence Deamon"
     _status=$(( $_status | $? ))
 
-    if [ "$_cmd" == "start" ]; then
-        declare -i _count=4
-        while ! runCommand "$MySQL" "status" "MySQL Database Deamon"
-        do
-            _count=$_count-1
-            [[ $_count == 0 ]] && break
-            echo "Waiting for the MySQL Service to start."
-            sleep $_delay
-        done
-        declare -i _count=4
-        while ! checkMySQL
-        do
-            _count=$_count-1
-            [[ $_count == 0 ]] && break
-            echo "Waiting for the MySQL Service to become available."
-            sleep $_delay
-        done
-    fi
-
     runCommand "$ZarafaServer" "$_cmd" "Zarafa Server Deamon"
     _status=$(( $_status | $? ))
 
@@ -237,11 +218,6 @@ function status() {
         _status=$(( $_status | $? ))
 
         runCommand "$ZarafaPresence" status "Zarafa Presence Deamon"
-        _status=$(( $_status | $? ))
-
-        runCommand "$MySQL" status "MySQL Database Deamon"
-        _status=$(( $_status | $? ))
-        checkMySQL
         _status=$(( $_status | $? ))
 
         runCommand "$ZarafaServer" status "Zarafa Server Deamon"
