@@ -44,6 +44,8 @@ function setup() {
 function status() {
     local _status=0 
 
+    echo "$_version"
+
     if [ "$_version" == "1" ]; then
         $_this_initd status
         _status=$?
