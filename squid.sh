@@ -23,6 +23,8 @@ _this_initd=/etc/init.d/brandt-squid
 _initd_squid=/etc/init.d/squid
 _conf_squid=/etc/squid/squid.conf
 
+echo "here"
+
 [ ! -r "$_initd_squid" ] && echo "Squid must be installed! Unable to find required file: $_initd_squid" 1>&2 && exit 6
 php --help > /dev/null 2>&1 || echo "PHP must be installed!" 1>&2 && exit 6
 
