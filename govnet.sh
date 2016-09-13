@@ -61,6 +61,17 @@ function setup() {
     return $(( $_status | $? ))
 }
 
+function addroute() {
+    local _status=0    
+    local _quiet=${1:-1}
+
+    echo -n "Adding Default 169.254.0.0 routing "
+	ip route add 169.254.0.0/16 dev eth0  > /dev/null 2>&1
+	brandt_status setup
+    _status=$(( $_status | $? ))
+  
+    return $_status
+}
 
 function status() {
     local _status=0    
@@ -128,9 +139,7 @@ case "$_command" in
 				start ;;
 	"status" ) 	status "$_quiet" ;;
     "setup" )	setup ;;
-    "add" )		echo -n "Adding Default 169.254.0.0 routing "
-				ip route add 169.254.0.0/16 dev eth0  > /dev/null 2>&1
-				brandt_status setup ;;
+    "add" )		addroute ;;
     * )        	usage 1 ;;
 esac
 exit $?
