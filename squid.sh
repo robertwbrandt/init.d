@@ -46,12 +46,12 @@ function status() {
 
     if [ "$_version" == "1" ]; then
         $_this_initd status
-        $_status = $?
+        $_status=$?
     else
         echo -n "Checking for Squid deamon "
         $_this_initd status > /dev/null 2>&1
         brandt_status status
-        $_status = $?
+        $_status=$?
     fi
 
     return $_status
@@ -72,16 +72,16 @@ function start() {
     if [ -f "$_conf_squid" ]; then
         if [ "$_version" == "1" ]; then
             $_this_initd start
-            $_status = $?
+            $_status=$?
         else
             echo -n "Starting Squid deamon "
             $_this_initd start > /dev/null 2>&1
             brandt_status start
-            $_status = $?
+            $_status=$?
         fi
     else
         logger -st "squid" "Unable to open configuration file: $_conf_squid: No such file or directory"
-        _status = 7
+        _status=7
     fi
 
     return $_status
