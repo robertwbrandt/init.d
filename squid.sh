@@ -125,10 +125,11 @@ fi
 #Bad arguments
 #[ $? -ne 0 ] && usage 1 "$0: No arguments supplied!\n"
 
+echo "here1"
+
 eval set -- "$_args";
 
 _verbose=0
-
 while /bin/true ; do
     case "$1" in
         -v | --verbose )   _verbose=1 ;;
@@ -142,11 +143,15 @@ done
 _command=$( lower "$1" )
 shift 1
 
+echo "here2"
+
 # Check to see if installed and configured
 if [ "$_command" == "installed" ] || [ "$_command" == "configured" ]; then
     ( ( installed ) >&$_quiet ) 2>/dev/null
     exit $?
 fi
+
+echo "here3"
 
 # Check to see if user is root, if not re-run script as root.
 brandt_amiroot || { echo "${BOLD_RED}This program must be run as root!${NORMAL}" >&2 ; sudo "$0" $@ ; exit $?; }
