@@ -29,6 +29,8 @@ php --help > /dev/null 2>&1 || echo "PHP must be installed!" 1>&2 && exit 6
 [ ! -r "$_brandt_utils" ] && echo "Unable to find required file: $_brandt_utils" 1>&2 && exit 6
 . "$_brandt_utils"
 
+echo "first"
+
 function installed() { return 0 ; }
 function configured() { return 0 ; }
 
@@ -115,6 +117,8 @@ function usage() {
       echo -e " -V, --version  output version information and exit" ) >&$_output
     exit $_exitcode
 }
+
+echo "second"
 
 # Execute getopt
 if ! _args=$( getopt -o vhV -l "verbose,help,version" -n "$0" -- "$@" 2>/dev/null ); then
