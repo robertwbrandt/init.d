@@ -27,7 +27,7 @@ _conf_squid=/etc/squid/squid.conf
 
 echo "first"
 
-tmp=$(php --help 2>&1 ) || echo "PHP must be installed!" 1>&2 && exit 6
+[ ! -x "/usr/bin/php" ] && echo "PHP must be installed!" 1>&2 && exit 6
 
 echo "first"
 
