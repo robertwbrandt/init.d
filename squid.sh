@@ -23,8 +23,6 @@ _this_initd=/etc/init.d/brandt-squid
 _initd_squid=/etc/init.d/squid
 _conf_squid=/etc/squid/squid.conf
 
-echo "here"
-
 [ ! -r "$_initd_squid" ] && echo "Squid must be installed! Unable to find required file: $_initd_squid" 1>&2 && exit 6
 php --help > /dev/null 2>&1 || echo "PHP must be installed!" 1>&2 && exit 6
 
@@ -153,14 +151,16 @@ fi
 # Check to see if user is root, if not re-run script as root.
 brandt_amiroot || { echo "${BOLD_RED}This program must be run as root!${NORMAL}" >&2 ; sudo "$0" $@ ; exit $?; }
 
+echo $_command
+
 case "$_command" in
     "setup" )        setup ;;
     "status" )       status ;;
     "start" )        start ;;
-    "stop" )         allothercommands "$command" ;;
-    "restart" )      allothercommands "$command" ;;
-    "force-reload" ) allothercommands "$command" ;;
-    "reload" )       allothercommands "$command" ;;
+    "stop" )         allothercommands "$_command" ;;
+    "restart" )      allothercommands "$_command" ;;
+    "force-reload" ) allothercommands "$_command" ;;
+    "reload" )       allothercommands "$_command" ;;
     * )              usage 1 ;;
 esac
 exit $?
