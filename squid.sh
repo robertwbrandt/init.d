@@ -93,10 +93,10 @@ function allothercommands() {
 
     if [ "$_verbose" == "1" ]; then
         $_initd_squid $_command
-        $_status = $?
+        _status=$?
     else
         brandt_deamon_wrapper "Squid deamon" "$_initd_squid" "$_command"
-        $_status = $?
+        _status=$?
     fi
 
     return $_status
