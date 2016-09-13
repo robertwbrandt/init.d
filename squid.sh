@@ -44,9 +44,9 @@ function setup() {
 function status() {
     local _status=0 
 
-    echo "$_version"
+    echo "$_verbose"
 
-    if [ "$_version" == "1" ]; then
+    if [ "$_verbose" == "1" ]; then
         $_this_initd status
         _status=$?
     else
@@ -72,7 +72,7 @@ function start() {
     done
 
     if [ -f "$_conf_squid" ]; then
-        if [ "$_version" == "1" ]; then
+        if [ "$_verbose" == "1" ]; then
             $_this_initd start
             _status=$?
         else
@@ -93,7 +93,7 @@ function allothercommands() {
     local _status=0 
     local _command=$1
 
-    if [ "$_version" == "1" ]; then
+    if [ "$_verbose" == "1" ]; then
         $_this_initd $_command
         $_status = $?
     else
