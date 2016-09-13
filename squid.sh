@@ -24,12 +24,19 @@ _initd_squid=/etc/init.d/squid
 _conf_squid=/etc/squid/squid.conf
 
 [ ! -r "$_initd_squid" ] && echo "Squid must be installed! Unable to find required file: $_initd_squid" 1>&2 && exit 6
-php --help > /dev/null 2>&1 || echo "PHP must be installed!" 1>&2 && exit 6
-
-[ ! -r "$_brandt_utils" ] && echo "Unable to find required file: $_brandt_utils" 1>&2 && exit 6
-. "$_brandt_utils"
 
 echo "first"
+
+php --help > /dev/null 2>&1 || echo "PHP must be installed!" 1>&2 && exit 6
+
+echo "first"
+
+[ ! -r "$_brandt_utils" ] && echo "Unable to find required file: $_brandt_utils" 1>&2 && exit 6
+
+echo "first"
+
+. "$_brandt_utils"
+
 
 function installed() { return 0 ; }
 function configured() { return 0 ; }
