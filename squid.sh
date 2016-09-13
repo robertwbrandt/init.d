@@ -24,17 +24,9 @@ _initd_squid=/etc/init.d/squid
 _conf_squid=/etc/squid/squid.conf
 
 [ ! -r "$_initd_squid" ] && echo "Squid must be installed! Unable to find required file: $_initd_squid" 1>&2 && exit 6
-
-echo "first"
-
 [ ! -x "/usr/bin/php" ] && echo "PHP must be installed!" 1>&2 && exit 6
 
-echo "first"
-
 [ ! -r "$_brandt_utils" ] && echo "Unable to find required file: $_brandt_utils" 1>&2 && exit 6
-
-echo "first"
-
 . "$_brandt_utils"
 
 
@@ -125,8 +117,6 @@ function usage() {
     exit $_exitcode
 }
 
-echo "second"
-
 # Execute getopt
 if ! _args=$( getopt -o vhV -l "verbose,help,version" -n "$0" -- "$@" 2>/dev/null ); then
     _err=$( getopt -o vhV -l "verbose,help,version" -n "$0" -- "$@" 2>&1 >/dev/null )
@@ -135,8 +125,6 @@ fi
 
 #Bad arguments
 #[ $? -ne 0 ] && usage 1 "$0: No arguments supplied!\n"
-
-echo "here1"
 
 eval set -- "$_args";
 
@@ -154,20 +142,14 @@ done
 _command=$( lower "$1" )
 shift 1
 
-echo "here2"
-
 # Check to see if installed and configured
 if [ "$_command" == "installed" ] || [ "$_command" == "configured" ]; then
     ( ( installed ) >&$_quiet ) 2>/dev/null
     exit $?
 fi
 
-echo "here3"
-
 # Check to see if user is root, if not re-run script as root.
 brandt_amiroot || { echo "${BOLD_RED}This program must be run as root!${NORMAL}" >&2 ; sudo "$0" $@ ; exit $?; }
-
-echo $_command
 
 case "$_command" in
     "setup" )        setup ;;
