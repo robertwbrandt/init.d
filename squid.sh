@@ -44,14 +44,12 @@ function setup() {
 function status() {
     local _status=0 
 
-    echo "$_verbose"
-
     if [ "$_verbose" == "1" ]; then
-        $_this_initd status
+        $_initd_squid status
         _status=$?
     else
         echo -n "Checking for Squid deamon "
-        $_this_initd status > /dev/null 2>&1
+        $_initd_squid status > /dev/null 2>&1
         brandt_status status
         _status=$?
     fi
@@ -73,11 +71,11 @@ function start() {
 
     if [ -f "$_conf_squid" ]; then
         if [ "$_verbose" == "1" ]; then
-            $_this_initd start
+            $_initd_squid start
             _status=$?
         else
             echo -n "Starting Squid deamon "
-            $_this_initd start > /dev/null 2>&1
+            $_initd_squid start > /dev/null 2>&1
             brandt_status start
             _status=$?
         fi
@@ -94,7 +92,7 @@ function allothercommands() {
     local _command=$1
 
     if [ "$_verbose" == "1" ]; then
-        $_this_initd $_command
+        $_initd_squid $_command
         $_status = $?
     else
         brandt_deamon_wrapper "Squid deamon" "$_initd_squid" "$_command"
