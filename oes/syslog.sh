@@ -33,6 +33,8 @@ _this_cron=/etc/cron.weekly/syslog-cleanup
 _bin_syslog=/sbin/syslog-ng
 _conf_syslog=/etc/syslog-ng/syslog-ng.conf
 _initd_syslog=/etc/init.d/syslog
+_initd_apache=/etc/init.d/apache2
+_initd_smb=/etc/init.d/smb
 
 [ ! -r "$_brandt_utils" ] && echo "Unable to find required file: $_brandt_utils" 1>&2 && exit 6
 . "$_brandt_utils"
@@ -52,9 +54,13 @@ function cleanup() {
 
     if [[ $( df /var/log | sed -n "s|.* [0-9]\+%|&|p" | sed -e "s|%.*||" -e "s|.* ||" ) -gt 80 ]]; then
         logger -st $( basename $_this_script ) "running out of log space, cleaning up old logs."
+        rm /var/log/messages /var/log/localmessages /var/log/apache2/rewrite_log /var/log/samba/audit /var/log/warn /var/log/wtmp
         find /var/log -iname "*.bz2" -delete
         find /var/log -iname "*.old" -delete
+        $_initd_apache reload
+        $_initd_smb reload;
         $_initd_syslog reload
+
     fi
 }
 
